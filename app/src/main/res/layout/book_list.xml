@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable name="viewModel" type="com.turkishrondo.www.bibleplaces.viewmodel.BookViewModel"/>
+    </data>
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/book_list"
+            android:name="com.turkishrondo.www.bibleplaces.view.BookListFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:visibility="@{safeUnbox(viewModel.downloadComplete) ? View.VISIBLE : View.GONE}"
+            app:layoutManager="LinearLayoutManager"
+            tools:context=".view.BookListActivity"
+            tools:listitem="@layout/book_list_content"/>
+
+</layout>

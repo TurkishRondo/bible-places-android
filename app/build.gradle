@@ -1,0 +1,70 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.turkishrondo.www.bibleplaces"
+        minSdkVersion 16
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    // DATA BINDING: We need this for data binding!
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    // KOTLIN
+    // https://kotlinlang.org/docs/reference/using-gradle.html
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    // GOOGLE
+    // https://developer.android.com/reference/com/google/android/material/packages
+    implementation 'com.google.android.material:material:1.0.0'
+    // https://developers.google.com/android/reference/com/google/android/gms/maps/package-summary
+    // 2019/04/23 Given the rest of the project stays constant, version 16.1.0 does not work and results in the
+    // "<Your App> is having trouble with Google Play services.  Please try again." error when running the app.
+    implementation 'com.google.android.gms:play-services-maps:16.0.0'   // For google map and kml data.
+    implementation 'com.google.maps.android:android-maps-utils:0.5'     // For google map and kml data.
+
+    // ANDROIDX:
+    // https://developer.android.com/reference/androidx/packages
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.core:core-ktx:1.0.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'           // For RecyclerView
+
+    // RETROFIT:
+    // http://square.github.io/retrofit/
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'        // For web server interaction (REST API).
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'              // For web server interaction (REST API).
+
+    // TEST (LOCAL UNIT)
+    testImplementation 'androidx.arch.core:core-testing:2.0.1'          // For unit testing w/ LiveData
+    // https://junit.org/junit4/javadoc/latest/
+    testImplementation 'junit:junit:4.12'                               // For basic unit testing.
+
+    // TEST (INSTRUMENTED)
+    // https://developer.android.com/reference/androidx/test/packages
+    androidTestImplementation 'androidx.test:core:1.1.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
+    androidTestImplementation 'androidx.test:rules:1.1.1'
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+}

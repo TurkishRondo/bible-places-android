@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.turkishrondo.www.bibleplaces">
+
+    <!-- To display map. -->
+    <!-- The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality. -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+    <!-- To connect to the server. -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <!-- To save downloaded files. -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <!-- To download data from the web server, include android:usesCleartextTraffic="true" -->
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+
+        <!-- The API key for Google Maps-based APIs is defined as a string resource.  Note that the API key is linked to
+             the encryption key used to sign the APK.  You need a different API key for each encryption key, including
+             the release key that is used to sign the APK for publishing.  You can define the keys for the debug and
+             release targets in src/debug/ and src/release/.  Name the files "google_maps_api."  There should be one for
+             debug and one for release.  Copy-paste the following:
+
+             <resources>
+                 <string name="google_maps_key" translatable="false" templateMergeStrategy="preserve">YOUR_KEY_HERE</string>
+             </resources>
+
+              -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key"/>
+
+        <!-- This embeds the version of Google Play services that the app was compiled with.
+             https://developers.google.com/maps/documentation/android-sdk/config#specify_requirement_for_apache_http_legacy_library -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <!-- If you are using com.google.android.gms:play-services-maps:16.0.0 or below and your app is targeting API
+             level 28 (Android 9.0) or above, you must include the following declaration.  This is handled for you if
+             you are using com.google.android.gms:play-services-maps:16.1.0 and is not necessary if your app is
+             targeting a lower API level.
+             https://developers.google.com/maps/documentation/android-sdk/config#specify_requirement_for_apache_http_legacy_library -->
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <!-- Book List Activity -->
+        <activity
+                android:name="com.turkishrondo.www.bibleplaces.view.BookListActivity"
+                android:label="@string/title_book_list"
+                android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <!-- Book Detail Activity -->
+        <activity
+            android:name="com.turkishrondo.www.bibleplaces.view.BookDetailActivity"
+            android:label="@string/title_activity_maps"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.turkishrondo.www.bibleplaces.view.BookListActivity"/>
+        </activity>
+    </application>
+
+</manifest>

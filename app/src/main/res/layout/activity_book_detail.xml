@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- DATA BINDING: In the resource file where want to do data-binding, we need to do the following:
+     1. Use a <layout> view at the root level.
+     2. Within the <data> tags, specify the variables in the "data binding class", which is an auto-generated class.
+     3. Specify in the data-binding for the views that use them.  Behind the scenes, android figures out how to map
+        what is put here with the code that gets called.  It's confusing IMO.  There's more information in the guide:
+        https://developer.android.com/topic/libraries/data-binding/expressions
+        https://developer.android.com/topic/libraries/data-binding/two-way -->
+
+<!-- DATA BINDING: The <layout> tag indicates that we're doing data-binding in here. -->
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- DATA BINDING: The variables in the <data> section get auto-generated in the "data binding class" which has a
+         name similar to this resource file.  For example, "ActivityBookDetailBinding". -->
+    <data>
+        <import type="android.view.View"/>
+        <variable name="viewModel" type="com.turkishrondo.www.bibleplaces.viewmodel.BookViewModel"/>
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:context=".view.BookDetailActivity"
+        tools:ignore="MergeRootFrame">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            <!-- DATA BINDING: Toolbar is data-bound to BookViewModel.  We use one of the variables defined above,
+                 but further, the naming of this seems to be figured out behind the scenes.  See the links to the guide
+                 in the comment at the top, if needed.  -->
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/detail_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:title="@{viewModel.selectedBookTitle}"
+                app:subtitle="@{viewModel.selectedChapterTitle}"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <FrameLayout
+            android:id="@+id/book_detail_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
